@@ -24,6 +24,7 @@ func TestE2E(t *testing.T) {
 	tckPath := filepath.Join(dir, "http-wasm-tck")
 	guestPath := filepath.Join(dir, "guest.wasm")
 
+	// This builds http-wasm-tck from TestMain
 	buildCmd := exec.Command(filepath.Join(runtime.GOROOT(), "bin", "go"), "test", "-o", tckPath, "-c", "..")
 	if err := buildCmd.Run(); err != nil {
 		t.Fatalf("error building tck binary: %v", err)
