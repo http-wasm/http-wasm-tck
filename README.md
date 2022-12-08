@@ -23,7 +23,7 @@ The Go implementation of the backend handler can be referred to [here][5].
 
 An HTTP server using this implementation can be started using
 `http-wasm-tck backend`. The server defaults to listening on
-`http://0.0.0.0:9080`, which can be changed with the `-addr` flag
+`0.0.0.0:9080`, which can be changed with the `-addr` flag.
 If the port passed to address is `0`, for example with
 `http-wasm-tck backend -addr 0.0.0.0:0`, a random port will be chosen. The
 backend always prints a message like `Started backend server on 0.0.0.0:9080`
