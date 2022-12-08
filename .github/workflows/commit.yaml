@@ -1,0 +1,110 @@
+# `name` value will appear "as is" in the badge.
+# See https://docs.github.com/en/actions/configuring-and-managing-workflows/configuring-a-workflow#adding-a-workflow-status-badge-to-your-repository
+# yamllint --format github .github/workflows/commit.yaml
+---
+name: "build"
+
+on:
+  push:  # We run tests on non-tagged pushes to main
+    tags: ''
+    branches: main
+    paths-ignore:
+      - '**/*.md'
+  pull_request:  # We also run tests on pull requests targeted at the main branch.
+    branches: main
+    paths-ignore:
+      - '**/*.md'
+  # workflow_dispatch will let us manually trigger the workflow from GitHub actions dashboard.
+  # For example, you can try to build a branch without raising a pull request.
+  # See https://docs.github.com/en/free-pro-team@latest/actions/managing-workflow-runs/manually-running-a-workflow
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        go-version:  # Note: Go only supports 2 versions: https://go.dev/doc/devel/release#policy
+          - "1.18"
+          - "1.19"
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-go@v3
+        with:  # not cache: true as we also need to cache golint
+          go-version: ${{ matrix.go-version }}
+
+      - uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache/go-build
+            ~/.cache/golangci-lint
+            ~/go/pkg/mod
+            ~/go/bin
+          key: check-${{ runner.os }}-go-${{ matrix.go-version }}-${{ hashFiles('**/go.sum', 'Makefile') }}
+
+      - run: make check
+
+  test:
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        go-version:  # Note: Go only supports 2 versions: https://go.dev/doc/devel/release#policy
+          - "1.18"
+          - "1.19"
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-go@v3
+        with:
+          go-version: ${{ matrix.go-version }}
+          cache: true
+
+      - run: make test
+
+  snapshot:
+    runs-on: ubuntu-22.04
+    needs: [check, test]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-go@v3
+        with:
+          go-version: 1.19
+          cache: true
+
+      - run: make snapshot
+
+      - uses: docker/setup-qemu-action@v2
+        with:
+          platforms: arm64
+      - uses: docker/setup-buildx-action@v2
+
+      - id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: |
+            ghcr.io/${{ github.repository }}
+          tags: |
+            type=schedule
+            type=ref,event=branch
+            type=ref,event=tag
+            type=ref,event=pr
+            type=sha
+
+      - uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: docker/build-push-action@v3
+        with:
+          context: .
+          push: ${{ github.event_name != 'pull_request' }}
+          platforms: linux/amd64,linux/arm64
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
