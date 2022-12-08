@@ -39,6 +39,11 @@ With the HTTP server started and serving the middleware and backend, the tests
 can be run using `http-wasm-tck run`. This defaults to issuing requests to
 `http://localhost:8080`, which can be changed with the `-url` flag.
 
+## Development
+
+The entrypoint to this application is in [runner_test.go][3], not a `main`
+package as is typical. See the [rationale][4] for more information on why.
+
 [1]: https://http-wasm.io/http-handler-abi/
 [2]: https://github.com/http-wasm/http-wasm-host-go/tree/main/tck
 [3]: https://github.com/http-wasm/http-wasm-tck/releases
