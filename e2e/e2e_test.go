@@ -100,6 +100,7 @@ func TestE2E(t *testing.T) {
 			}))
 
 			server := httptest.NewServer(h)
+			defer server.Close()
 
 			runCmd := exec.Command(tckPath, "run", "-url", server.URL)
 			err = runCmd.Run()
