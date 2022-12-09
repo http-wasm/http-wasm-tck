@@ -20,6 +20,6 @@ the functionality we need without relying on any internal or questionably
 supported mechanisms.
 
 [1]: https://pkg.go.dev/testing#Main
-[1]: https://pkg.go.dev/testing#MainStart
+[2]: https://pkg.go.dev/testing#MainStart
 [3]: ./runner_test.go
 [4]: ./RATIONALE.md
