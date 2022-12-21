@@ -53,6 +53,10 @@ func TestMain(m *testing.M) {
 		}
 
 		os.Exit(m.Run())
+	default:
+		fmt.Fprintf(os.Stderr, "unknown command: %s\n", subCmd)
+		printUsage(os.Stderr)
+		os.Exit(1)
 	}
 }
 
@@ -121,7 +125,7 @@ func printUsage(stdErr io.Writer) {
 	fmt.Fprintln(stdErr, "Usage:\n  http-wasm-tck <command>")
 	fmt.Fprintln(stdErr)
 	fmt.Fprintln(stdErr, "Commands:")
-	fmt.Fprintln(stdErr, "  extract\t\tExtracts the guest wasm file")
+	fmt.Fprintln(stdErr, "  extract-guest\t\tExtracts the guest wasm file")
 	fmt.Fprintln(stdErr, "  backend\t\tStarts the backend server")
 	fmt.Fprintln(stdErr, "  run\t\t\tRuns the tests")
 }
