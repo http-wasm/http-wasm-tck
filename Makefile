@@ -1,7 +1,7 @@
 gofumpt := mvdan.cc/gofumpt@v0.4.0
-gosimports := github.com/rinchsan/gosimports/cmd/gosimports@v0.3.4
-golangci_lint := github.com/golangci/golangci-lint/cmd/golangci-lint@v1.50.1
-goreleaser := github.com/goreleaser/goreleaser@v1.13.1
+gosimports := github.com/rinchsan/gosimports/cmd/gosimports@v0.3.8
+golangci_lint := github.com/golangci/golangci-lint/cmd/golangci-lint@v1.51.2
+goreleaser := github.com/goreleaser/goreleaser@v1.16.1
 
 .PHONY: build
 build:
