@@ -1,4 +1,4 @@
-github.com/http-wasm/http-wasm-host-go v0.2.1-0.20221208051559-359f2659391c h1:I7Iq019AmpRVbc8jbZWb2mIgx07oX3eZ2lQeBo/uwIA=
-github.com/http-wasm/http-wasm-host-go v0.2.1-0.20221208051559-359f2659391c/go.mod h1:OTNlRT3nkPc+WpuxZe1lgZ+X31GaoghBg01SQkPKMjs=
-github.com/tetratelabs/wazero v1.0.0-pre.4 h1:RBJQT5OzmORkSp6MmZDWoFEr0zXjk4pmvMKAdeUnsaI=
-github.com/tetratelabs/wazero v1.0.0-pre.4/go.mod h1:u8wrFmpdrykiFK0DFPiFm5a4+0RzsdmXYVtijBKqUVo=
+github.com/http-wasm/http-wasm-host-go v0.3.5 h1:PEbiFN6gi7Tpgs4PBlC3XCF3uUzPp0D95z9yD5rpYEo=
+github.com/http-wasm/http-wasm-host-go v0.3.5/go.mod h1:zxkCM5TRgJpTap/aZX5YhiQ4ERwgbUrSQpPVx5lHyVg=
+github.com/tetratelabs/wazero v1.0.0-rc.2 h1:OA3UUynnoqxrjCQ94mpAtdO4/oMxFQVNL2BXDMOc66Q=
+github.com/tetratelabs/wazero v1.0.0-rc.2/go.mod h1:wYx2gNRg8/WihJfSDxA1TIL8H+GkfLYm+bIfbblu9VQ=
