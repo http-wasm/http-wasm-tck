@@ -21,16 +21,15 @@ on:
 
 env:  # Update this prior to requiring a higher minor version in go.mod
   GO_VERSION: "1.20"  # 1.xx == latest patch of 1.xx
-  MIN_GO_VERSION: "1.19"  # Go only supports 2 versions
 
 jobs:
   check:
     runs-on: ubuntu-22.04
     strategy:
       matrix:
-        go-version:
-          - ${{ env.MIN_GO_VERSION }}
-          - ${{ env.GO_VERSION }}
+        go-version:  # Hard code as we can't use template variables in a matrix
+          - "1.19"  # Go only supports 2 versions
+          - "1.20"  # match env.GO_VERSION
 
     steps:
       - uses: actions/checkout@v3
@@ -54,9 +53,9 @@ jobs:
     runs-on: ubuntu-22.04
     strategy:
       matrix:
-        go-version:
-          - ${{ env.MIN_GO_VERSION }}
-          - ${{ env.GO_VERSION }}
+        go-version:  # Hard code as we can't use template variables in a matrix
+          - "1.19"  # Go only supports 2 versions
+          - "1.20"  # match env.GO_VERSION
 
     steps:
       - uses: actions/checkout@v3
