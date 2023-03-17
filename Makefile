@@ -38,3 +38,7 @@ clean: ## Ensure a clean build
 .PHONY: snapshot
 snapshot:
 	@go run $(goreleaser) build --snapshot --rm-dist
+
+.PHONY: release
+release:
+	@go run $(goreleaser) release --rm-dist
