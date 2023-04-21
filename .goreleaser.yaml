@@ -18,6 +18,8 @@ archives:
         format: zip
 release:
   draft: true
+changelog:
+  skip: true
 checksum:
   name_template: 'checksums.txt'
 snapshot:
