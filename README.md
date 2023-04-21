@@ -42,10 +42,11 @@ can be run using `http-wasm-tck run`. This defaults to issuing requests to
 ## Development
 
 The entrypoint to this application is in [runner_test.go][3], not a `main`
-package as is typical. See the [rationale][4] for more information on why.
+package as is typical. See the [rationale][6] for more information on why.
 
 [1]: https://http-wasm.io/http-handler-abi/
 [2]: https://github.com/http-wasm/http-wasm-host-go/tree/main/tck
 [3]: https://github.com/http-wasm/http-wasm-tck/releases
 [4]: https://github.com/http-wasm/http-wasm-tck/pkgs/container/http-wasm-tck
 [5]: https://github.com/http-wasm/http-wasm-host-go/blob/359f2659391c4407272406a818dfc8bdef934419/tck/backend.go#L13
+[6]: ./RATIONALE.md
