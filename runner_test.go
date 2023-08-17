@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"io"
+	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
@@ -166,5 +167,5 @@ func TestTCK(t *testing.T) {
 
 	_ = flags.Parse(flag.Args()[1:])
 
-	tck.Run(t, addr)
+	tck.Run(t, http.DefaultClient, addr)
 }
